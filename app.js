@@ -83,7 +83,7 @@ async function buyBnb() {
             const {tradeFee: [{taker: fee}]} = await client2.privateRequest('GET', '/wapi/v3/tradeFee.html', {
                 symbol: symbol
             });
-            const qty = Number((gbpBalance / +BNBGBP) * (1 - fee / 100)).toFixed(precision);
+            const qty = Number((gbpBalance / +BNBGBP)).toFixed(precision) - fee;
             if (qty > 0) {
                 const buy = await client2.privateRequest('POST', pathOrder, {
                     symbol: 'BNBGBP',
